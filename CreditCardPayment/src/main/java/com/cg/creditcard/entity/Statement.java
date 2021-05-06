@@ -24,13 +24,32 @@ public class Statement {
 	@Column
 	private Date due_date;
 	
-//	One to one mapping with Customer table
+	public Statement() {
+		// TODO Auto-generated constructor stub
+	}
+	
+	
+public Statement(int statement_id, double due_amount, Date billing_date, Date due_date, Customer customer) {
+		super();
+		this.statement_id = statement_id;
+		this.due_amount = due_amount;
+		this.billing_date = billing_date;
+		this.due_date = due_date;
+		this.customer = customer;
+	}
+
+
+  //One to one mapping with Customer table
 	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "userid")
   private Customer customer;
+	
+	//One to one mapping with Payment table
+		@OneToOne(cascade = CascadeType.ALL)
+		@JoinColumn(name = "paymentId")
+	    private Payment payment;
 
 	//Required getters and setters
-	
 	public int getStatement_id() {
 		return statement_id;
 	}
@@ -61,5 +80,12 @@ public class Statement {
 	public void setCustomer(Customer customer) {
 		this.customer = customer;
 	}
+	public Payment getPayment() {
+		return payment;
+	}
+	public void setPayment(Payment payment) {
+		this.payment = payment;
+	}
+	
 	
 }

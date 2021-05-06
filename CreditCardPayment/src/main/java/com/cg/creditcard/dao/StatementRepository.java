@@ -8,5 +8,5 @@ import com.cg.creditcard.entity.Statement;
 @Repository
 public interface StatementRepository extends JpaRepository<Statement, Integer>{
 	@Query(value = " from Statement statement where statement.statement_id=?1")
-	public Statement getStatementById(int statement_id);
+	public Statement getStatementbyId(int statement_id);
 }
