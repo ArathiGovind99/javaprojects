@@ -8,7 +8,7 @@ public class AddressDto {
 	private String city;
 	private String state_name;
 	private int pincode;
-	private CustomerDto customer;
+	//private CustomerDto customer;
 	
 	public String getHouse_no() {
 		return house_no;
@@ -46,12 +46,12 @@ public class AddressDto {
 	public void setPincode(int pincode) {
 		this.pincode = pincode;
 	}
-	public CustomerDto getCustomer() {
-		return customer;
-	}
-	public void setCustomer(CustomerDto customer) {
-		this.customer = customer;
-	}
+//	public CustomerDto getCustomer() {
+//		return customer;
+//	}
+//	public void setCustomer(CustomerDto customer) {
+//		this.customer = customer;
+//	}
 	public int getAddressid() {
 		return addressid;
 	}

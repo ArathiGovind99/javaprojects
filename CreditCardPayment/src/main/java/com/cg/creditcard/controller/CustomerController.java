@@ -1,6 +1,7 @@
 package com.cg.creditcard.controller;
 
 import java.util.List;
+import java.util.Random;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -15,20 +16,47 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.cg.creditcard.dto.AccountDto;
+import com.cg.creditcard.dto.CreditCardDto;
 import com.cg.creditcard.dto.CustomerDto;
+import com.cg.creditcard.dto.PaymentDto;
 import com.cg.creditcard.entity.Customer;
+import com.cg.creditcard.service.AccountService;
+import com.cg.creditcard.service.CreditCardService;
 import com.cg.creditcard.service.CustomerService;
+import com.cg.creditcard.service.PaymentService;
 @CrossOrigin(origins="http://localhost:3000")
 @RestController
 @RequestMapping("/customer")
 public class CustomerController {
 	@Autowired
 	CustomerService service;
+	@Autowired
+	AccountService accService;
+	@Autowired
+	CreditCardService ccService;
+	@Autowired
+	PaymentService payService;
 	
-	@PostMapping("/addcustomer")
-	public ResponseEntity<String> addCustomer(@RequestBody Customer customer) {
-		service.addCustomer(customer);
+	@PostMapping
+	public ResponseEntity<String> addCustomer(@RequestBody CustomerDto customerDto) {
+		Random rand=new Random();
+	   int  random=rand.nextInt(1000);
+		 customerDto.setUserid(random);
+		System.out.println(	customerDto);
+		service.addCustomer(customerDto);
+	  AccountDto acc=new AccountDto();
+	  acc.setCustomer(customerDto);
+	  accService.addAccount(acc);
+	  CreditCardDto cc=new CreditCardDto();
+	  cc.setCustomer(customerDto);
+	  ccService.addCreditCard(cc);
+	  PaymentDto pay=new PaymentDto();
+	  pay.setCustomer(customerDto);
+	  payService.addPayment(pay);
+	  
 		return new ResponseEntity<String>("Customer inserted",HttpStatus.OK);
+		
 		}
 	
 	@DeleteMapping("/deletecustomer")

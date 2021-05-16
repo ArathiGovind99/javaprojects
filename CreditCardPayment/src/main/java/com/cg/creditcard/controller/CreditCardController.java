@@ -25,7 +25,7 @@ public class CreditCardController {
 	@Autowired
 	CreditCardService service;
 	
-	@PostMapping("/addcreditcard")
+	@PostMapping
 	public ResponseEntity<String> addCreditCard(@RequestBody CreditCardDto creditcardDto)
 	{
 		service.addCreditCard(creditcardDto);
@@ -49,7 +49,7 @@ public class CreditCardController {
 		CreditCard creditcard=service.getCreditCardById(card_number);
 		return new ResponseEntity<CreditCard>(creditcard,HttpStatus.OK);
 	}
-	@GetMapping("/getall")
+	@GetMapping
 	public ResponseEntity<List<CreditCard>> getAllCreditCard()
 	{
 		List<CreditCard> numberList=service.getAllCreditCard();

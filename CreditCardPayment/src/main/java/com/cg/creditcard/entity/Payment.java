@@ -2,17 +2,16 @@
 package com.cg.creditcard.entity;
 
 import java.sql.Date;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
+//import javax.persistence.GeneratedValue;
+//import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
-
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
 //Entity with table name="Payment"
@@ -20,7 +19,7 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 @Table(name = "Payment")
 public class Payment {
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int paymentId;
 	@Column
 	private String status;
@@ -35,13 +34,24 @@ public class Payment {
 	 @JsonBackReference
 	    private Customer customer;
 	//One to one mapping with Statement table
-		@OneToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "due_date")
-	   private Statement statement;
+//		@OneToOne(cascade = CascadeType.ALL)
+//	@JoinColumn(name = "due_date")
+//	   private Statement statement;
 	
 	//Constructor
 	public Payment() {
 	}
+
+	//Parameterized Constructor
+	public Payment(int paymentId, String status, double amount, Date transaction_date, Customer customer) {
+		super();
+		this.paymentId = paymentId;
+		this.status = status;
+		this.amount = amount;
+		this.transaction_date = transaction_date;
+		this.customer = customer;
+	}
+
 
 	//Required getters and setters
 	public Customer getCustomer() {
@@ -74,12 +84,12 @@ public class Payment {
 	public void setTransaction_date(Date transaction_date) {
 		this.transaction_date = transaction_date;
 	}
-
-	public Statement getStatement() {
-		return statement;
-	}
-
-	public void setStatement(Statement statement) {
-		this.statement = statement;
-	}
+//
+//	public Statement getStatement() {
+//		return statement;
+//	}
+//
+//	public void setStatement(Statement statement) {
+//		this.statement = statement;
+//	}
 }

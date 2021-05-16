@@ -1,23 +1,16 @@
 package com.cg.creditcard.entity;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
+//import javax.persistence.GeneratedValue;
+//import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-
-import com.fasterxml.jackson.annotation.JsonBackReference;
 
 //Entity with table name="Address"
 @Entity
 @Table(name = "Address")
 public class Address {
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int addressid;
 	@Column
 	private String house_no;
@@ -32,23 +25,13 @@ public class Address {
 	@Column
 	private int pincode;
 
-	//Constructor
+	// Default Constructor
 	public Address() {
 	}
 	
-	//Many to one mapping with Customer table
-	@ManyToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name="userid")
-	 @JsonBackReference
-	    private Customer customer;
 	
-  //Required getters and setters
-	public Customer getCustomer() {
-		return customer;
-	}
-	public void setCustomer(Customer customer) {
-		this.customer = customer;
-	}
+//Required getters and setters
+
 	public int getAddressid() {
 		return addressid;
 	}

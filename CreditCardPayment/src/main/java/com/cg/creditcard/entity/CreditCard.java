@@ -1,9 +1,10 @@
 package com.cg.creditcard.entity;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
+//import javax.persistence.GeneratedValue;
+//import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -16,7 +17,7 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 @Table(name="CreditCard")
 public class CreditCard {
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int card_number;
 	@Column
 	private String card_name;
@@ -27,12 +28,23 @@ public class CreditCard {
 	@Column
 	private double amount_limit;
 	
-	//Constructor
+	// Default Constructor
 	public CreditCard() {
 	}
 	
+	//Parameterized Constructor
+	public CreditCard(int card_number, String card_name, int expiry_month, int expiry_year, double amount_limit,
+			Customer customer) {
+		super();
+		this.card_number = card_number;
+		this.card_name = card_name;
+		this.expiry_month = expiry_month;
+		this.expiry_year = expiry_year;
+		this.amount_limit = amount_limit;
+		this.customer = customer;
+	}
 	//Many to one mapping with Customer table
-	@ManyToOne(fetch = FetchType.EAGER)
+	@ManyToOne
 	@JsonBackReference
 	@JoinColumn(name = "userid")
 	private Customer customer;

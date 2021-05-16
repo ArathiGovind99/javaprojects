@@ -18,17 +18,10 @@ public class AccountService implements IAccountService {
 	List<Account> accountList=new ArrayList<>();
 
 	@Override
-	public void addAccount(AccountDto accountDto) {
-		ObjectMapper mapper=new ObjectMapper();
-		mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
-		Account account=new Account();
-		account=mapper.convertValue(accountDto, Account.class);
-		dao.save(account);
-	}
-	@Override
-	public void removeAccount(int account_id) throws IDNotFoundException{
+	public 	String removeAccount(int account_id) throws IDNotFoundException{
 		if(dao.existsById(account_id)) {
 			dao.deleteById(account_id);
+			return"account deleted";
 	         }
 		
 		throw new IDNotFoundException();
@@ -44,13 +37,14 @@ public class AccountService implements IAccountService {
 		throw new IDNotFoundException();
 	}
 	@Override
-	public void updateAccount(int account_id, Account account)throws IDNotFoundException {
+	public String updateAccount(int account_id, Account account)throws IDNotFoundException {
 		if(dao.existsById(account_id)) {
 			Account accountupdate=dao.findById(account_id).get();
-			accountupdate.setAccount_id(account.getAccount_id());
+			//accountupdate.setAccount_id(account.getAccount_id());
 			accountupdate.setAccount_name(account.getAccount_name());
 			accountupdate.setBalance(account.getBalance());
 			dao.save(accountupdate);
+			return "account details updated";
 		}
 		throw new IDNotFoundException();
 	}
@@ -61,5 +55,13 @@ public class AccountService implements IAccountService {
 			throw new ListIsEmptyException();
 		}
 		return accountList;
+	}
+	@Override
+	public void addAccount(AccountDto accountDto) {
+		ObjectMapper mapper=new ObjectMapper();
+		mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+		Account account=new Account();
+		account=mapper.convertValue(accountDto, Account.class);
+		dao.save(account);
 	}
 }

@@ -5,8 +5,6 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
@@ -20,8 +18,12 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 @Table(name = "Customer")
 public class Customer {
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int userid;
+	@Override
+	public String toString() {
+		return "Customer [userid=" + userid + "]";
+	}
+
 	@Column
 	private String first_name;
 	@Column
@@ -39,14 +41,17 @@ public class Customer {
 	//Constructor
 	public Customer() {
 	}
+	
+	// Parameterized Constructor
+
 	//One to many mapping with the respective tables
 	@OneToMany(mappedBy = "customer")
 	@JsonManagedReference
 	private List<CreditCard>creditcard;
 
-	@OneToMany(mappedBy = "customer")
-	  @JsonManagedReference
-	private List<Address>address;
+	@OneToOne
+	@JoinColumn(name = "addressid")
+	private Address address;
 	
 	@OneToMany(mappedBy = "customer")
 	  @JsonManagedReference
@@ -55,7 +60,7 @@ public class Customer {
 	@OneToMany(mappedBy = "customer")
   @JsonManagedReference
 	private List<Account> account;
-	
+//	
 	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "statement_id")
   private Statement statement;
@@ -122,10 +127,10 @@ public class Customer {
 	public void setCreditcard(List<CreditCard> creditcard) {
 		this.creditcard = creditcard;
 	}
-	public List<Address> getAddress() {
+	public Address getAddress() {
 		return address;
 	}
-	public void setAddress(List<Address> address) {
+	public void setAddress(Address address) {
 		this.address = address;
 	}
 	public List<Payment> getPayment() {
@@ -140,11 +145,11 @@ public class Customer {
 	public void setAccount(List<Account> account) {
 		this.account = account;
 	}
-	public Statement getStatement() {
-		return statement;
-	}
-	public void setStatement(Statement statement) {
-		this.statement = statement;
-	}
+//	public Statement getStatement() {
+//		return statement;
+//	}
+//	public void setStatement(Statement statement) {
+//		this.statement = statement;
+//	}
 	
 }
