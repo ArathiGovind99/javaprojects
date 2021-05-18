@@ -8,7 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.cg.creditcard.dao.StatementRepository;
 import com.cg.creditcard.entity.Statement;
-import com.cg.creditcard.utils.IDNotFoundException;
 import com.cg.creditcard.utils.ListIsEmptyException;
 @Service
 public class StatementService implements IStatementService  {
@@ -18,8 +17,8 @@ public class StatementService implements IStatementService  {
 	List<Statement>statementList=new ArrayList<>();
 
 	@Override
-	public Statement getStatement(int userid) throws IDNotFoundException {
-		return dao.findById(userid).orElse(null);
+	public Statement getStatement(int statement_id)  {
+		return dao.findById(statement_id).orElse(null);
 	}
 	
 
@@ -30,5 +29,12 @@ public class StatementService implements IStatementService  {
 			throw new  ListIsEmptyException();
 		}
 		return statementList;
+	}
+
+
+	@Override
+	public void addStatement(Statement statement) {
+		dao.save(statement);
+		
 	}
 }

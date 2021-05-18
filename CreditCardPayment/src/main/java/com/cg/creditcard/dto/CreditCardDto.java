@@ -1,16 +1,16 @@
 package com.cg.creditcard.dto;
 
 public class CreditCardDto {
-	private int card_number;
+	private long card_number;
 	private String card_name;
 	private int expiry_month;
 	private int expiry_year;
 	private double amount_limit;
 	private CustomerDto customer;
-	public int getCard_number() {
+	public long getCard_number() {
 		return card_number;
 	}
-	public void setCard_number(int card_number) {
+	public void setCard_number(long card_number) {
 		this.card_number = card_number;
 	}
 	public String getCard_name() {

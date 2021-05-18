@@ -27,7 +27,7 @@ public class CreditCardService implements ICreditCardService {
 	}
 	
 	@Override
-	public void removeCreditCard(int card_number) throws CardNumberNotFoundException {
+	public void removeCreditCard(long card_number) throws CardNumberNotFoundException {
 		creditcardList=dao.findAll();
 		for(CreditCard cc:creditcardList) {
 			if(cc.getCard_number()==card_number) {
@@ -38,7 +38,7 @@ public class CreditCardService implements ICreditCardService {
 		throw new CardNumberNotFoundException();	
 	}
 	@Override
-	public void updateCreditCard(int card_number, CreditCard creditcard) throws CardNumberNotFoundException {
+	public void updateCreditCard(long card_number, CreditCard creditcard) throws CardNumberNotFoundException {
 		if(dao.existsById(card_number)) {
 			CreditCard ccupdate=dao.findById(card_number).get();
 			ccupdate.setCard_number(creditcard.getCard_number());
@@ -52,7 +52,7 @@ public class CreditCardService implements ICreditCardService {
 	}
 	
 	@Override
-	public CreditCard getCreditCardById(int card_number) throws CardNumberNotFoundException {
+	public CreditCard getCreditCardById(long card_number) throws CardNumberNotFoundException {
 		creditcardList=dao.findAll();
 		for(CreditCard cc:creditcardList) {
 			if(cc.getCard_number()==card_number) {

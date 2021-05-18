@@ -1,5 +1,7 @@
 package com.cg.creditcard.service;
 
+import java.time.Clock;
+import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,14 +19,16 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 public class PaymentService implements IPaymentService {
 	@Autowired
 	PaymentRepository dao;
+	Clock cl = Clock.systemUTC();
 	List<Payment>paymentList=new ArrayList<>();
 	@Override
-	public Payment getPaymentDetails(int paymentId) throws IDNotFoundException {
+	public Payment payment(int paymentId) throws IDNotFoundException {
 		paymentList=dao.findAll();
 		for(Payment pt:paymentList) {
 		if(pt.getPaymentId()==paymentId) {
-			dao.findById(paymentId);
-		return getPaymentDetails(paymentId);
+			Payment payment =dao.getPaymentById(paymentId);
+			payment.setTransaction_date(java.time.LocalDateTime.now(cl));
+		return payment(paymentId);
 		}
 		}
 		throw new IDNotFoundException ();
@@ -44,6 +48,7 @@ public class PaymentService implements IPaymentService {
 		mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
 		Payment payment=new Payment();
 		payment=mapper.convertValue(paymentDto, Payment.class);
+		payment.setTransaction_date(java.time.LocalDateTime.now(cl));
 		dao.save(payment);
 	}
 

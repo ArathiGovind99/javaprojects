@@ -1,7 +1,8 @@
 
 package com.cg.creditcard.entity;
 
-import java.sql.Date;
+import java.time.LocalDateTime;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -26,7 +27,7 @@ public class Payment {
 	@Column
 	private double amount;
 	@Column
-	private Date transaction_date;
+	private LocalDateTime transaction_date;
 
 	//Many to one mapping with Customer table
 	@ManyToOne
@@ -43,7 +44,8 @@ public class Payment {
 	}
 
 	//Parameterized Constructor
-	public Payment(int paymentId, String status, double amount, Date transaction_date, Customer customer) {
+	
+	public Payment(int paymentId, String status, double amount, LocalDateTime transaction_date, Customer customer) {
 		super();
 		this.paymentId = paymentId;
 		this.status = status;
@@ -51,9 +53,8 @@ public class Payment {
 		this.transaction_date = transaction_date;
 		this.customer = customer;
 	}
-
-
 	//Required getters and setters
+
 	public Customer getCustomer() {
 		return customer;
 	}
@@ -78,12 +79,15 @@ public class Payment {
 	public void setAmount(double amount) {
 		this.amount = amount;
 	}
-	public Date getTransaction_date() {
+
+	public LocalDateTime getTransaction_date() {
 		return transaction_date;
 	}
-	public void setTransaction_date(Date transaction_date) {
+
+	public void setTransaction_date(LocalDateTime transaction_date) {
 		this.transaction_date = transaction_date;
 	}
+	
 //
 //	public Statement getStatement() {
 //		return statement;
