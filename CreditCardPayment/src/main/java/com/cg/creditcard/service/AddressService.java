@@ -27,10 +27,16 @@ public class AddressService implements IAddressService {
 	}
 	@Override
 	public String removeAddress(int addressid)  throws IDNotFoundException{
-		if(dao.existsById(addressid)) {
-			dao.deleteById(addressid);
-			return "address deleted";
-		}
+		
+			
+			 List<Address> addList=dao.findAll();
+			 for(Address address:addList) {
+				 if(address.getAddressid()==addressid) {
+					 dao.deleteById(addressid);
+					 return "address deleted";
+			}
+			}
+			 
 		throw new IDNotFoundException();
 	}
 	@Override

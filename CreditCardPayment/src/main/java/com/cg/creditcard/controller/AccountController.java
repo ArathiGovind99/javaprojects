@@ -42,14 +42,14 @@ public class AccountController  {
 		return new ResponseEntity<String>("Account Deleted", HttpStatus.OK);
 	}
 	
-	@GetMapping("/getaccount")
-	public ResponseEntity<Account> getAccount(@RequestParam int account_id) {
+	@GetMapping("/getaccount/{account_id}")
+	public ResponseEntity<Account> getAccount(@PathVariable ("account_id ")int account_id) {
 		Account account = service.getAccount(account_id);
 		return new ResponseEntity<Account>(account, HttpStatus.OK);
 	}
 	
-	@PutMapping("/updateaccount/{account_id}")
-	public ResponseEntity<String> updateAccount(@RequestBody Account account,@PathVariable int account_id) {
+	@PutMapping("/updateAccount")
+	public ResponseEntity<String> updateAccount(@RequestParam int account_id,@RequestBody Account account) {
 		service.updateAccount(account_id, account);
 		return new ResponseEntity<String>("Successfully updated", HttpStatus.OK); 
 	}

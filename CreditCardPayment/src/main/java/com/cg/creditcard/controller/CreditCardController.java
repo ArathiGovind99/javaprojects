@@ -37,13 +37,13 @@ public class CreditCardController {
 		service.removeCreditCard(card_number);
 		return new ResponseEntity<String>("card deleted..",HttpStatus.OK);
 	}
-	@PutMapping("/updateCreditCard")
+	@PutMapping("/updatecard")
 	public ResponseEntity<String> updateCreditCard(@RequestBody CreditCard creditcard,@RequestParam int card_number)
 	{
 		service.updateCreditCard(card_number, creditcard);
 		return new ResponseEntity<String>("Successfully updated",HttpStatus.OK);
 	}
-	@GetMapping("/getCreditCard")
+	@GetMapping("/getcard")
 	public ResponseEntity<CreditCard> getCreditCard(@RequestParam int card_number)
 	{
 		CreditCard creditcard=service.getCreditCardById(card_number);
