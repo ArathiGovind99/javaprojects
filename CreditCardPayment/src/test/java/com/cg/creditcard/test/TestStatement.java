@@ -1,6 +1,9 @@
 
 package com.cg.creditcard.test;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
@@ -25,7 +28,7 @@ public class TestStatement {
 	public void testGetAllStatement() {
 		List<Statement> statements=new ArrayList<Statement>();
 		
-		statements.add(new Statement(1, 5000,'21-09-2021','21-12-2021',1));
+		statements.add(new Statement(11, 5000,'21-09-2021','21-12-2021',1));
 		Mockito.when(dao.findAll()).thenReturn(statements);
 		List<Statement> list = service.getAllStatement();
 		Assertions.assertEquals(1, list.size());

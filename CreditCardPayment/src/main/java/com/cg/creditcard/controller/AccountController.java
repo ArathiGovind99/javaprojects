@@ -36,7 +36,7 @@ public class AccountController  {
 		return new ResponseEntity<String>("Account inserted",HttpStatus.OK);
 		}
 	
-	@DeleteMapping("/deleteAccount/{account_id}")
+	@DeleteMapping("/deleteaccount/{account_id}")
 	public ResponseEntity<String> removeAccount(@PathVariable("account_id") int account_id) {
 		service.removeAccount(account_id);
 		return new ResponseEntity<String>("Account Deleted", HttpStatus.OK);
@@ -48,6 +48,7 @@ public class AccountController  {
 		return new ResponseEntity<Account>(account, HttpStatus.OK);
 	}
 	
+
 	@PutMapping("/updateAccount")
 	public ResponseEntity<String> updateAccount(@RequestParam int account_id,@RequestBody Account account) {
 		service.updateAccount(account_id, account);

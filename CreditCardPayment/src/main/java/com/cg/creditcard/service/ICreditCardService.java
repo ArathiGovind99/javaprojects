@@ -6,8 +6,8 @@ import com.cg.creditcard.utils.CardNumberNotFoundException;
 import com.cg.creditcard.utils.ListIsEmptyException;
 public interface ICreditCardService {
 	public void addCreditCard(CreditCardDto creditcardDto);
-	public void removeCreditCard(int card_number)throws CardNumberNotFoundException;
-	public void updateCreditCard(int card_number,CreditCard creditcard)throws CardNumberNotFoundException;
-	public CreditCard getCreditCardById(int card_number)throws CardNumberNotFoundException;
+	public void removeCreditCard(long card_number)throws CardNumberNotFoundException;
+	public void updateCreditCard(long card_number,CreditCard creditcard)throws CardNumberNotFoundException;
+	public CreditCard getCreditCardById(long card_number)throws CardNumberNotFoundException;
 	public List<CreditCard> getAllCreditCard() throws ListIsEmptyException;
 }

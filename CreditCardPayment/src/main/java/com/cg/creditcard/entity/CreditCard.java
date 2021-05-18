@@ -1,8 +1,7 @@
 package com.cg.creditcard.entity;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
+
 //import javax.persistence.GeneratedValue;
 //import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -17,8 +16,7 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 @Table(name="CreditCard")
 public class CreditCard {
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int card_number;
+	private long card_number;
 	@Column
 	private String card_name;
 	@Column
@@ -50,10 +48,10 @@ public class CreditCard {
 	private Customer customer;
 	
 	//Required getters and setters
-	public int getCard_number() {
+	public long getCard_number() {
 		return card_number;
 	}
-	public void setCard_number(int card_number) {
+	public void setCard_number(long card_number) {
 		this.card_number = card_number;
 	}
 	public String getCard_name() {

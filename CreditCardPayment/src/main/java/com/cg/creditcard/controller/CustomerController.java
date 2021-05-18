@@ -38,7 +38,7 @@ public class CustomerController {
 	@Autowired
 	PaymentService payService;
 	
-	@PostMapping
+	@PostMapping("/post")
 	public ResponseEntity<String> addCustomer(@RequestBody CustomerDto customerDto) {
 		Random rand=new Random();
 	   int  random=rand.nextInt(1000);

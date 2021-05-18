@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -31,20 +32,26 @@ public class CreditCardController {
 		service.addCreditCard(creditcardDto);
 		return new ResponseEntity<>("CreditCard added",HttpStatus.OK);
 	}
-	@DeleteMapping("/deletecard")
-	public ResponseEntity<String> deleteCreditCard(@RequestParam int card_number)
+	@DeleteMapping("/deletecard/{card_number}")
+	public ResponseEntity<String> deleteCreditCard(@PathVariable("card_number") long card_number)
 	{
 		service.removeCreditCard(card_number);
 		return new ResponseEntity<String>("card deleted..",HttpStatus.OK);
 	}
-	@PutMapping("/updatecard")
-	public ResponseEntity<String> updateCreditCard(@RequestBody CreditCard creditcard,@RequestParam int card_number)
+
+	
+	@PutMapping("/updatecreditcard")
+	public ResponseEntity<String> updateCreditCard(@RequestBody CreditCard creditcard,@RequestParam long card_number)
+
 	{
 		service.updateCreditCard(card_number, creditcard);
 		return new ResponseEntity<String>("Successfully updated",HttpStatus.OK);
 	}
-	@GetMapping("/getcard")
-	public ResponseEntity<CreditCard> getCreditCard(@RequestParam int card_number)
+
+
+	@GetMapping("/getCreditCard")
+	public ResponseEntity<CreditCard> getCreditCard(@RequestParam long card_number)
+
 	{
 		CreditCard creditcard=service.getCreditCardById(card_number);
 		return new ResponseEntity<CreditCard>(creditcard,HttpStatus.OK);
